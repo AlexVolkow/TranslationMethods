@@ -3,8 +3,9 @@
 
 # Построим грамматику
 
-* `S -> FUN NAME (ARGS): NAME`
+* `S -> FUN NAME (ARGS) RETTYPE`
 * `FUN -> function | procedure`
+* `RETTYPE -> : NAME | eps`
 * `ARGS -> ARGLIST : NAME ARGSPLIT | eps`
 * `ARGLIST -> NAME, ARGLIST`
 * `ARGLIST -> NAME`
@@ -17,6 +18,7 @@
 ------------- | -------------
 S  | Описание заголовка функции в Паскале
 FUN | Ключевое слово function или procedure
+RETTYPE | Тип возвращаемого значения
 ARGS | Описание аргументов функции
 ARGSPLIT | Разделитель между группами аргументов
 ARGLIST | Список аргументов, разделенных запятыми
@@ -25,8 +27,9 @@ NAME | Имя переменной или типа
 
 ## Устранение правового ветвления
 
-* `S -> FUN NAME (ARGS): NAME`
+* `S -> FUN NAME (ARGS) RETTYPE`
 * `FUN -> function | procedure`
+* `RETTYPE -> : NAME | eps`
 * `ARGS -> ARGLIST : NAME ARGSPLIT | eps`
 * `ARGLIST -> NAME ARGLIST'`
 * `ARGLIST' -> , ARGLIST | eps`
@@ -37,6 +40,7 @@ NAME | Имя переменной или типа
 ------------- | -------------
 S  | Описание заголовка функции в Паскале
 FUN | Ключевое слово function или procedure
+RETTYPE | Тип возвращаемого значения
 ARGS | Описание аргументов функции
 ARGSPLIT | Разделитель между группами аргументов
 ARGLIST | Список аргументов, разделенных запятыми
@@ -52,6 +56,7 @@ NAME | Имя переменной или типа
 -----------|----------|-------
 S          | `function`, `procedure` |`$`
 FUN          | `function`, `procedure` |` `
+RETTYPE | `:` | `$`
 ARGS  | `eps`,`ch`  |`)`
 ARGLIST    | `eps`, `ch` |`:`
 ARGLIST'   | `,`, `eps` |`:`
