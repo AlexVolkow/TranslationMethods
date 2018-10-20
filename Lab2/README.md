@@ -1,0 +1,2 @@
+# TranslationMethods
+Методы трансляции(ИТМО)

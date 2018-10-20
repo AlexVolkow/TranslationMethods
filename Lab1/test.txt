@@ -1,0 +1,21 @@
+<a tag="hey" params href="http://www.second.ru/school" > 
+< a href="first:3385" > 
+< a antoher="sdf" href="10.0.0.1:3385" asdfas = "sdfsd"> 
+< a href="ftp://user@10.0.0.100:3385" > 
+< a href="crypto.ct.ru" > 
+< a href="user:pass@regex.best.ru" > 
+< a href="user@kek.www.w3" > 
+< a href="ftp://user@thanks.jok88e?var=args" > 
+< a href="ftp://user:pass@other.ct.ru:9888/path?var=args" > 
+< a href="//user:pass@hello.ru:9888#hello" > 
+< a href="/path/hel" > 
+< a href="#fragment" > 
+< a href="?arg=ver#fragment" > 
+< a href=" site.com#fragment " > 
+< a href=" //user:hel@site2.com#fragment " > 
+< a href=" protocol://user:hel@site3.com#fragment " > 
+< a href=" protocol://user:hel@site3.com?as=e#fragment " > 
+< a href="chapter6.html" > 
+< a href="./chapter7.html" > 
+< a href=" user:pass@35.98.10.20:5689 " > 
+< A href = " http://admin:admin@localhost/test/ " >
