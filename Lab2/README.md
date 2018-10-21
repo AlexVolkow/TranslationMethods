@@ -10,7 +10,7 @@
 * `ARGLIST -> NAME, ARGLIST`
 * `ARGLIST -> NAME`
 * `ARGSPLIT -> ; ARGS | eps`
-* `NAME -> [a-zA-Z]NAME`
+* `NAME -> [a-zA-Z]{1}[a-zA-Z0-9]*`
 
 ## Описание 
 
@@ -34,7 +34,7 @@ NAME | Имя переменной или типа
 * `ARGLIST -> NAME ARGLIST'`
 * `ARGLIST' -> , ARGLIST | eps`
 * `ARGSPLIT -> ; ARGS | eps`
-* `NAME -> [a-zA-Z]NAME`
+* `NAME -> [a-zA-Z]{1}[a-zA-Z0-9]*`
 
 Нетерминал    | Значение
 ------------- | -------------
