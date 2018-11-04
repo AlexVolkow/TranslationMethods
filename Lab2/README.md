@@ -7,7 +7,7 @@
 * `FUN -> function | procedure`
 * `RETTYPE -> : NAME | eps`
 * `ARGS -> ARGLIST : NAME ARGSPLIT | eps`
-* `ARGLIST -> NAME, ARGLIST`
+* `ARGLIST -> ARGLIST, NAME`
 * `ARGLIST -> NAME`
 * `ARGSPLIT -> ; ARGS | eps`
 * `NAME -> [a-zA-Z]{1}[a-zA-Z0-9]*`
@@ -25,14 +25,14 @@ ARGLIST | Список аргументов, разделенных запяты
 NAME | Имя переменной или типа
 
 
-## Устранение правового ветвления
+## Устранение левой рекурсии
 
 * `S -> FUN NAME (ARGS) RETTYPE`
 * `FUN -> function | procedure`
 * `RETTYPE -> : NAME | eps`
 * `ARGS -> ARGLIST : NAME ARGSPLIT | eps`
-* `ARGLIST -> NAME ARGLIST'`
-* `ARGLIST' -> , ARGLIST | eps`
+* `ARGLIST -> NAME ARGLIST' | NAME`
+* `ARGLIST' -> , NAME ARGLIST' | , NAME`
 * `ARGSPLIT -> ; ARGS | eps`
 * `NAME -> [a-zA-Z]{1}[a-zA-Z0-9]*`
 
@@ -58,7 +58,7 @@ S          | `function`, `procedure` |`$`
 FUN          | `function`, `procedure` |` `
 RETTYPE | `:` | `$`
 ARGS  | `eps`,`ch`  |`)`
-ARGLIST    | `eps`, `ch` |`:`
-ARGLIST'   | `,`, `eps` |`:`
+ARGLIST    | `ch` |`:`
+ARGLIST'   | `,` |`:`
 ARGSPLIT | `;` , `eps` | `)`
 NAME       | `ch`      |`;`,`,`, `(`, `)`, `$`

@@ -74,10 +74,12 @@ class Parser {
         return when (lexer.currToken) {
             Token.NAME -> {
                 val name = NAME()
-                lexer.nextToken()
-                val arglistAdd = ARGLIST_NEXT()
-
-                Tree("ARGLIST", name, arglistAdd)
+                if (lexer.nextToken() == Token.COMMA) {
+                    val arglistAdd = ARGLIST_NEXT()
+                    Tree("ARGLIST", name, arglistAdd)
+                } else {
+                    Tree("ARGLIST", name)
+                }
             }
             else -> failWith("names of arguments")
         }
@@ -89,8 +91,12 @@ class Parser {
 
             Token.COMMA -> {
                 lexer.nextToken()
-
-                Tree("ARGSLIST_NEXT", COMMA_TREE, ARGLIST())
+                val name = NAME()
+                if (lexer.nextToken() == Token.COMMA) {
+                    Tree("ARGSLIST_NEXT", COMMA_TREE, name, ARGLIST_NEXT())
+                } else {
+                    Tree("ARGSLIST_NEXT", COMMA_TREE, name)
+                }
             }
 
             else -> failWith("names of arguments")
