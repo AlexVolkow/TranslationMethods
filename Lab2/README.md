@@ -4,7 +4,9 @@
 # Построим грамматику
 
 * `S -> FUN NAME (ARGS) RETTYPE`
+* `S -> FUN NAME RETTYPE`
 * `S -> PROC NAME (ARGS)`
+* `S -> PROC NAME`
 * `FUN -> function`
 * `PROC -> procedure`
 * `RETTYPE -> : NAME`
@@ -31,7 +33,9 @@ NAME | Имя переменной или типа
 ## Устранение левой рекурсии
 
 * `S -> FUN NAME (ARGS) RETTYPE`
+* `S -> FUN NAME RETTYPE`
 * `S -> PROC NAME (ARGS)`
+* `S -> PROC NAME`
 * `FUN -> function`
 * `PROC -> procedure`
 * `RETTYPE -> : NAME | eps`
