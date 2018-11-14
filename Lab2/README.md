@@ -4,8 +4,12 @@
 # Построим грамматику
 
 * `S -> FUN NAME (ARGS) RETTYPE`
-* `FUN -> function | procedure`
-* `RETTYPE -> : NAME | eps`
+* `S -> FUN NAME RETTYPE`
+* `S -> PROC NAME (ARGS)`
+* `S -> PROC NAME`
+* `FUN -> function`
+* `PROC -> procedure`
+* `RETTYPE -> : NAME`
 * `ARGS -> ARGLIST : NAME ARGSPLIT | eps`
 * `ARGLIST -> ARGLIST, NAME`
 * `ARGLIST -> NAME`
@@ -17,7 +21,8 @@
 Нетерминал    | Значение
 ------------- | -------------
 S  | Описание заголовка функции в Паскале
-FUN | Ключевое слово function или procedure
+FUN | Ключевое слово function
+PROC | Ключевое слово procedure
 RETTYPE | Тип возвращаемого значения
 ARGS | Описание аргументов функции
 ARGSPLIT | Разделитель между группами аргументов
@@ -28,7 +33,11 @@ NAME | Имя переменной или типа
 ## Устранение левой рекурсии
 
 * `S -> FUN NAME (ARGS) RETTYPE`
-* `FUN -> function | procedure`
+* `S -> FUN NAME RETTYPE`
+* `S -> PROC NAME (ARGS)`
+* `S -> PROC NAME`
+* `FUN -> function`
+* `PROC -> procedure`
 * `RETTYPE -> : NAME | eps`
 * `ARGS -> ARGLIST : NAME ARGSPLIT | eps`
 * `ARGLIST -> NAME ARGLIST' | NAME`
@@ -39,7 +48,8 @@ NAME | Имя переменной или типа
 Нетерминал    | Значение
 ------------- | -------------
 S  | Описание заголовка функции в Паскале
-FUN | Ключевое слово function или procedure
+FUN | Ключевое слово function
+PROC | Ключевое слово procedure
 RETTYPE | Тип возвращаемого значения
 ARGS | Описание аргументов функции
 ARGSPLIT | Разделитель между группами аргументов
@@ -55,7 +65,8 @@ NAME | Имя переменной или типа
 Нетерминал | FIRST    | FOLLOW
 -----------|----------|-------
 S          | `function`, `procedure` |`$`
-FUN          | `function`, `procedure` |` `
+FUN          | `function` |` `
+PROC | `procedure` | ` `
 RETTYPE | `:` | `$`
 ARGS  | `eps`,`ch`  |`)`
 ARGLIST    | `ch` |`:`
