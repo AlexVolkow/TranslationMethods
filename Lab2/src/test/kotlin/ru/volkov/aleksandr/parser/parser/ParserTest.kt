@@ -78,4 +78,22 @@ internal class ParserTest {
         val test = "lambda foo(a, b, c1:integer; b:real; e,d: char)"
         assertThrows(ParserException::class.java) { parser.parse(test.byteInputStream())}
     }
+
+    @Test
+    fun procWithoutArgs() {
+        val test = "procedure a"
+        val tree = parser.parse(test.byteInputStream())
+        println(tree)
+
+        assertEquals("procedure a", tree.toPrettyString())
+    }
+
+    @Test
+    fun funWithoutArgs() {
+        val test = "function a:real"
+        val tree = parser.parse(test.byteInputStream())
+        println(tree)
+
+        assertEquals("function a : real", tree.toPrettyString())
+    }
 }

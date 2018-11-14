@@ -15,22 +15,51 @@ class Parser {
     }
 
     private fun S(): Tree {
-        val ftype = FUN()
+        val isFun: Boolean
+        val ftype = if (lexer.currToken == Token.FUNCTION) {
+            isFun = true
+            FUN()
+        } else {
+            isFun = false
+            PROC()
+        }
+
         lexer.nextToken()
         val name = NAME()
         lexer.nextToken()
-        checkToken(Token.LEFT_BRACKET)
-        lexer.nextToken()
-        val args = ARGS()
-        lexer.nextToken()
-        val rettype = RETTYPE()
 
-        return Tree("S", ftype, name, Tree("("), args, Tree(")"), rettype)
+        var args: Tree? = null
+        if (lexer.currToken == Token.LEFT_BRACKET) {
+            lexer.nextToken()
+            args = ARGS()
+            lexer.nextToken()
+        }
+
+        return if (isFun) {
+            val rettype = RETTYPE()
+            if (args == null) {
+                Tree("S", ftype, name, rettype)
+            } else {
+                Tree("S", ftype, name, Tree("("), args, Tree(")"), rettype)
+            }
+        } else {
+            if (args == null) {
+                Tree("S", ftype, name)
+            } else {
+                Tree("S", ftype, name, Tree("("), args, Tree(")"))
+            }
+        }
     }
 
     private fun FUN(): Tree {
         return when (lexer.currToken) {
             Token.FUNCTION -> Tree("FUN", Tree("function"))
+            else -> failWith("'function' or 'procedure'")
+        }
+    }
+
+    private fun PROC(): Tree {
+        return when (lexer.currToken) {
             Token.PROCEDURE -> Tree("FUN", Tree("procedure"))
             else -> failWith("'function' or 'procedure'")
         }
