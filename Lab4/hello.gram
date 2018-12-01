@@ -1,0 +1,10 @@
+package ru.volkov.aleksandr.top.examples.expr
+
+start =  hello
+
+hello : String := HELLO a { ("Hello, " + a + "!").capitalize() };
+a : String := ID { ID };
+
+HELLO : "hello";
+ID : "[A-Z][a-z]*";
+WS skip "\s+";
