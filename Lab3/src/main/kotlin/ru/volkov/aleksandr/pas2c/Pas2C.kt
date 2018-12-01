@@ -2,6 +2,7 @@ package ru.volkov.aleksandr.pas2c
 
 import PascalBaseVisitor
 import PascalParser
+import java.lang.IllegalArgumentException
 
 class Pas2C : PascalBaseVisitor<String>() {
     override fun visitProgram(ctx: PascalParser.ProgramContext?) = buildString {
@@ -62,6 +63,7 @@ class Pas2C : PascalBaseVisitor<String>() {
             ctx.math_statement() != null -> visitMath_statement(ctx.math_statement())
             ctx.assignment() != null -> visitAssignment(ctx.assignment())
             ctx.function() != null -> visitFunction(ctx.function())
+            ctx.if_cond() != null -> visitIf_cond(ctx.if_cond())
             else -> visitBlock(ctx.block())
         }
     }
@@ -95,7 +97,7 @@ class Pas2C : PascalBaseVisitor<String>() {
 
     override fun visitFunc_parameter(ctx: PascalParser.Func_parameterContext?): String {
         return if (ctx!!.ARG() != null) {
-            ctx.ARG().symbol.text
+            ctx.ARG().symbol.text.replace("'", "\"")
         } else {
             visitMath(ctx.math())
         }
@@ -159,13 +161,46 @@ class Pas2C : PascalBaseVisitor<String>() {
         if (ctx == null) {
             return ""
         }
-        addAlign("{")
+        append(" {\n")
         newScope {
             ctx.code().forEach {
                 addAlign(visitCode(it))
             }
         }
         addAlign("}")
+    }
+
+    override fun visitIf_cond(ctx: PascalParser.If_condContext?) = buildString {
+        if (ctx == null) {
+            return ""
+        }
+        val cond = visitCond(ctx.cond()!!)
+        append("if ($cond)")
+        append(visitBlock(ctx.block(0)).trimMargin())
+        if (ctx.ELSE() != null) {
+            append(" else")
+            append(visitBlock(ctx.block(1)).trimMargin())
+        }
+    }
+
+    override fun visitCond(ctx: PascalParser.CondContext?): String {
+        if (ctx == null) {
+            return ""
+        }
+        return ctx.IDENT(0).symbol.text + " ${visitSign(ctx.sign())} " + ctx.IDENT(1).symbol.text
+    }
+
+    override fun visitSign(ctx: PascalParser.SignContext?): String {
+        return when (ctx!!.children[0].text) {
+            "<" -> "<"
+            ">" -> ">"
+            "<=" -> "<="
+            ">=" -> ">="
+            "<>" -> "!="
+            "=" -> "=="
+
+            else -> throw IllegalArgumentException(ctx.children[0].text)
+        }
     }
 
     var indent = 0

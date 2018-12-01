@@ -29,7 +29,23 @@ code
     : math_statement
     | assignment
     | function
+    | if_cond
     | block;
+
+if_cond
+    : IF cond THEN block
+    | IF cond THEN block ELSE block;
+
+cond:
+    IDENT sign IDENT;
+
+sign
+    : '='
+    | '<>'
+    | '<'
+    | '>'
+    | '<='
+    | '>=';
 
 math_value
     :const_val
@@ -59,7 +75,7 @@ const_val:
     INT;
 
 block :
-	BEGIN (code)* END SEMICOLON;
+	BEGIN (code)* END SEMICOLON?;
 
 WS: [ \t\r\n]+ -> skip;
 
@@ -69,6 +85,9 @@ PROGRAM: 'program';
 BEGIN: 'begin';
 END: 'end';
 INTEGER: 'integer';
+IF: 'if';
+THEN: 'then';
+ELSE: 'else';
 
 ASSIGNMENT: ':=';
 EQUAL_SIGN: '=';

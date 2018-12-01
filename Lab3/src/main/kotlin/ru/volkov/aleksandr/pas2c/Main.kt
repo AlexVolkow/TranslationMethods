@@ -8,17 +8,18 @@ import java.io.PrintWriter
 
 
 fun main(args: Array<String>) {
-    val fileName = "testSomeFunction.pas"
-    val input = CharStreams.fromFileName(fileName)
-    val pascalLexer = PascalLexer(input)
-    val tokens = CommonTokenStream(pascalLexer)
-    val pascalParser = PascalParser(tokens)
-    val writer = PrintWriter("output.c", "UTF-8")
+    args.forEach {
+        val input = CharStreams.fromFileName(it)
+        val pascalLexer = PascalLexer(input)
+        val tokens = CommonTokenStream(pascalLexer)
+        val pascalParser = PascalParser(tokens)
+        val writer = PrintWriter("$it.c", "UTF-8")
 
-    val programm = pascalParser.program()
-    val p2c = Pas2C()
-    val toC = p2c.visitProgram(programm)
+        val programm = pascalParser.program()
+        val p2c = Pas2C()
+        val toC = p2c.visitProgram(programm)
 
-    writer.print(toC)
-    writer.close()
+        writer.print(toC)
+        writer.close()
+    }
 }

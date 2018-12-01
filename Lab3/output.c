@@ -2,14 +2,14 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+const int N = 69;
 int a, b;
-int N;
 
 int main() {
-    a = 42 + 35;
-    b = 12 * 135 + 35;
-    sqrt(a);
-    printf("%d", N + b);
+    scanf("%d%d", &a, &b);
+    a = b + a + 42;
+    printf("%s", 'result');
+    printf("%d\n", a);
     return 0;
 }
 

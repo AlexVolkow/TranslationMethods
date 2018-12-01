@@ -97,6 +97,36 @@ public interface PascalListener extends ParseTreeListener {
 	 */
 	void exitCode(PascalParser.CodeContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PascalParser#if_cond}.
+	 * @param ctx the parse tree
+	 */
+	void enterIf_cond(PascalParser.If_condContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PascalParser#if_cond}.
+	 * @param ctx the parse tree
+	 */
+	void exitIf_cond(PascalParser.If_condContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PascalParser#cond}.
+	 * @param ctx the parse tree
+	 */
+	void enterCond(PascalParser.CondContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PascalParser#cond}.
+	 * @param ctx the parse tree
+	 */
+	void exitCond(PascalParser.CondContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PascalParser#sign}.
+	 * @param ctx the parse tree
+	 */
+	void enterSign(PascalParser.SignContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PascalParser#sign}.
+	 * @param ctx the parse tree
+	 */
+	void exitSign(PascalParser.SignContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PascalParser#math_value}.
 	 * @param ctx the parse tree
 	 */

@@ -64,6 +64,24 @@ public interface PascalVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitCode(PascalParser.CodeContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link PascalParser#if_cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitIf_cond(PascalParser.If_condContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PascalParser#cond}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitCond(PascalParser.CondContext ctx);
+	/**
+	 * Visit a parse tree produced by {@link PascalParser#sign}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitSign(PascalParser.SignContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link PascalParser#math_value}.
 	 * @param ctx the parse tree
 	 * @return the visitor result
