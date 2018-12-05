@@ -1,7 +1,8 @@
 package ru.volkov.aleksandr.top.lexer.runtime
 
 import org.junit.jupiter.api.Test
-import ru.volkov.aleksandr.top.lexer.LexerContext
+import ru.volkov.aleksandr.top.analyzer.lexer.LexerContext
+import ru.volkov.aleksandr.top.analyzer.lexer.runtime.BaseLexer
 import java.io.Reader
 import kotlin.test.assertEquals
 

@@ -1,7 +1,9 @@
-package ru.volkov.aleksandr.top
+package ru.volkov.aleksandr.top.analyzer
 
-import ru.volkov.aleksandr.top.lexer.ILexerAnalyzer
-import ru.volkov.aleksandr.top.parser.IParserAnalyzer
+import ru.volkov.aleksandr.top.GrammarBaseListener
+import ru.volkov.aleksandr.top.GrammarParser
+import ru.volkov.aleksandr.top.analyzer.lexer.ILexerAnalyzer
+import ru.volkov.aleksandr.top.analyzer.parser.IParserAnalyzer
 
 class GrammarAnalyzer(
     private val lexerAnalyzer: ILexerAnalyzer,

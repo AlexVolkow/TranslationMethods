@@ -1,4 +1,4 @@
-package ru.volkov.aleksandr.top.parser
+package ru.volkov.aleksandr.top.analyzer.parser
 
 import ru.volkov.aleksandr.top.GrammarListener
 

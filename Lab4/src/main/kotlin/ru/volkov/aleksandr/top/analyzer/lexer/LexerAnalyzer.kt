@@ -1,6 +1,6 @@
-package ru.volkov.aleksandr.top.lexer
+package ru.volkov.aleksandr.top.analyzer.lexer
 
-import ru.volkov.aleksandr.top.EOF
+import ru.volkov.aleksandr.top.analyzer.EOF
 import ru.volkov.aleksandr.top.GrammarBaseListener
 import ru.volkov.aleksandr.top.GrammarParser
 
@@ -10,7 +10,8 @@ class LexerAnalyzer: GrammarBaseListener(), ILexerAnalyzer {
     private val skipTokens = HashSet<Int>()
     private val tokenTable = LinkedHashMap<String, Int>()
 
-    override fun lexerContext(): LexerContext = LexerContext(patterns, skipTokens, tokenTable = tokenTable)
+    override fun lexerContext(): LexerContext =
+        LexerContext(patterns, skipTokens, tokenTable = tokenTable)
 
     override fun exitGram(ctx: GrammarParser.GramContext?) {
         tokenTable[EOF] = -1

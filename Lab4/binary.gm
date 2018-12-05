@@ -1,0 +1,30 @@
+package examples.binary
+
+start = expr
+
+expr : Boolean := term exprs(term) { exprs } ;
+exprs [acc: Boolean] : Boolean
+    := AND term { val next = acc and term } exprs(next) { exprs }
+    | { acc } ;
+
+term : Boolean := factor terms(factor) {terms} ;
+terms [acc: Boolean] : Boolean
+    := OR factor { val next = acc or factor } terms(next) {terms}
+    | {acc} ;
+
+factor : Boolean := single factors(single) { factors };
+factors [acc: Boolean] : Boolean
+    := XOR single { val next = acc xor single } factors(next) { factors }
+    | {acc};
+
+single : Boolean
+    := LEFT_BRACKET expr RIGHT_BRACKET { expr }
+    | VARIABLE { VARIABLE.toBoolean() };
+
+AND       : "AND|&|and";
+OR        : "OR|\||or";
+XOR       : "XOR|\^|xor";
+VARIABLE  : "true|false";
+LEFT_BRACKET : "\(";
+RIGHT_BRACKET : "\)";
+SPACE     skip "[ \t\r\n]" ;

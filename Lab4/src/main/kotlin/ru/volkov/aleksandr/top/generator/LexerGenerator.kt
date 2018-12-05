@@ -1,11 +1,11 @@
 package ru.volkov.aleksandr.top.generator
 
-import ru.volkov.aleksandr.top.lexer.LexerContext
+import ru.volkov.aleksandr.top.analyzer.lexer.LexerContext
 
-class LexerGrammarFilesGenerator(
+class LexerGenerator(
     private val packageName: String?,
     private val context: LexerContext
-) : AbstractGrammarFilesGenerator() {
+) : AbstractGenerator() {
 
     override fun generate(grammarName: String) = buildString {
         packageName?.let {
@@ -13,19 +13,19 @@ class LexerGrammarFilesGenerator(
             newLine()
         }
         line("import java.io.Reader")
-        line("import ru.volkov.aleksandr.top.lexer.LexerContext")
-        line("import ru.volkov.aleksandr.top.lexer.runtime.BaseLexer")
+        line("import ru.volkov.aleksandr.top.analyzer.lexer.LexerContext")
+        line("import ru.volkov.aleksandr.top.analyzer.lexer.runtime.BaseLexer")
         newLine()
         line("object Tokens {")
-        scoped {
+        scope {
             (context.tokenTable!! - context.skipTokens).forEach { t, i ->
-                line("val $t = $i")
+                line("const val $t = $i")
             }
         }
         line("}")
         newLine()
         line("private val patterns: Map<Int, Regex> = mapOf(")
-        scoped {
+        scope {
             context.patterns.forEach { t, r ->
                 line("$t to Regex(\"${r.toString().escape()}\"),")
             }

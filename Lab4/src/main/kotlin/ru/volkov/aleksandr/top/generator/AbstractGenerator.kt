@@ -1,10 +1,10 @@
 package ru.volkov.aleksandr.top.generator
 
-abstract class AbstractGrammarFilesGenerator {
+abstract class AbstractGenerator: IGrammarGenerator {
     protected var indent = 0
 
     protected fun StringBuilder.line(line: String) {
-        for (i in 0 until (4 * indent)) append(" ")
+        append(" " .repeat(4 * indent))
         append(line)
         newLine()
     }
@@ -13,7 +13,7 @@ abstract class AbstractGrammarFilesGenerator {
         append(System.lineSeparator())
     }
 
-    protected inline fun scoped(block: () -> Unit) {
+    protected inline fun scope(block: () -> Unit) {
         indent++
         block()
         indent--
@@ -21,9 +21,11 @@ abstract class AbstractGrammarFilesGenerator {
 
     protected fun StringBuilder.removeLast() {
         var i = length - 1
-        while (this[i].isWhitespace() && i >= 0) i--
+        while (this[i].isWhitespace() && i >= 0) {
+            i--
+        }
         if (i >= 0) deleteCharAt(i)
     }
 
-    abstract fun generate(grammarName: String): String
+    abstract override fun generate(grammarName: String): String
 }

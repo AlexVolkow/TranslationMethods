@@ -41,8 +41,8 @@ lexerRule
 term
 	: REGEX;
 
-PARSER_IDN : [a-z][a-zA-Z0-9]*;
-LEXER_IDN : [A-Z][a-zA-Z0-9]*;
+PARSER_IDN : [a-z][a-zA-Z0-9_]*;
+LEXER_IDN : [A-Z][a-zA-Z0-9_]*;
 
 REGEX : '"' (~('\''|'\r' | '\n') | '\\\'')* '"';
 

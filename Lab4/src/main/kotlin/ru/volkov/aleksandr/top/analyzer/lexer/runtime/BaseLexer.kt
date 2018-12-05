@@ -1,6 +1,6 @@
-package ru.volkov.aleksandr.top.lexer.runtime
+package ru.volkov.aleksandr.top.analyzer.lexer.runtime
 
-import ru.volkov.aleksandr.top.lexer.LexerContext
+import ru.volkov.aleksandr.top.analyzer.lexer.LexerContext
 import java.io.IOException
 import java.io.Reader
 
@@ -35,7 +35,7 @@ open class BaseLexer(
                 tokenValue = null
                 return
             } else {
-                throw IOException("No more tokens")
+                throw IOException("No more tokens.")
             }
         }
 
@@ -51,6 +51,6 @@ open class BaseLexer(
             }
         }
 
-        throw LexerException("Unexpected token at position $position")
+        throw LexerException("Unexpected token at position $position.")
     }
 }
