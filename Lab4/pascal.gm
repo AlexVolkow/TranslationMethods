@@ -1,0 +1,33 @@
+package examples.pascal
+
+start = s
+
+s: Tree
+    := function name left_bracket args right_bracket rettype { Tree("S", function, name, Tree("("), args, Tree(")"), rettype) }
+    | proc name left_bracket args right_bracket { Tree("S", proc, name, Tree("("), args, Tree(")")) };
+
+rettype: Tree := COLON NAME { Tree("RETTYPE", Tree(":"), Tree(NAME)) };
+
+args: Tree := arglist COLON name argsplit { Tree("ARGS", arglist, Tree(":"), name, argsplit) } | { Tree("") };
+
+arglist: Tree := name arglist_next  { Tree("ARGLIST", name, arglist_next) };
+
+arglist_next: Tree := COMMA name arglist_next { Tree("ARGSLIST_NEXT", Tree(",") , name, arglist_next) } | { Tree("") };
+
+argsplit: Tree := SEMICOLON args { Tree("ARGSPLIT", Tree(";") , args) } | { Tree("") };
+
+left_bracket: Tree := LEFT_BRACKET { Tree("(") };
+right_bracket: Tree := RIGHT_BRACKET { Tree(")") };
+function: Tree := FUN { Tree("function") };
+proc: Tree := PROC { Tree("procedure") };
+name: Tree := NAME { Tree(NAME) };
+
+LEFT_BRACKET : "\(";
+RIGHT_BRACKET : "\)";
+FUN : "function";
+PROC: "procedure";
+COLON : "\:";
+SEMICOLON: "\;";
+COMMA : "\,";
+NAME : "[a-zA-Z]{1}[a-zA-Z0-9]*";
+WS skip "\s+";

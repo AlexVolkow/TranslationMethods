@@ -18,6 +18,9 @@ class LexerAnalyzer: GrammarBaseListener(), ILexerAnalyzer {
     }
 
     override fun exitLexerRule(ctx: GrammarParser.LexerRuleContext) {
+        if (ctx.LEXER_IDN() == null) {
+            return
+        }
         val token = ctx.LEXER_IDN().text
         val tokenId = tokenTable.getOrPut(token) { tokenCount++ }
 
