@@ -1,4 +1,4 @@
-package examples.expr
+package examples.expression
 
 start =  expr
 
@@ -19,11 +19,13 @@ factors [acc: Int] : Int
 
 single : Int
     := LEFT_BRACKET expr RIGHT_BRACKET { expr }
-    | NUM {NUM.toInt()};
+    | NUM { NUM.toInt() }
+    | MINUS single { -single };
 
 PLUS : "\+";
 POW : "\*\*";
 MUL : "\*";
+MINUS : "-";
 LEFT_BRACKET : "\(";
 RIGHT_BRACKET : "\)";
 NUM : "[0-9]+";

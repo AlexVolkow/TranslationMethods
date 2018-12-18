@@ -1,7 +1,7 @@
 package ru.volkov.aleksandr.top.lexer.runtime
 
-import examples.expr.ExpressionLexer
-import examples.expr.ExpressionParser
+import examples.expression.ExpressionLexer
+import examples.expression.ExpressionParser
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
@@ -26,6 +26,12 @@ internal class ExpressionTest {
     fun `(2 ** (2 ** 3)) * 3`() {
         assertEquals(768, eval("(2 ** (2 ** 3)) * 3"))
 
+    }
+
+    @Test
+    fun `unary minus`() {
+        assertEquals(-5, eval("-5"))
+        assertEquals(22, eval("-(1 + 2 * 5) * (-2)"))
     }
 
     private fun eval(s: String) = ExpressionParser(ExpressionLexer(s.reader())).parse()

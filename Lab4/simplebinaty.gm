@@ -1,0 +1,15 @@
+package examples.binary
+
+start = expr
+
+expr : Boolean := expr binop(expr1, expr2) expr { true } |  VARIABLE { VARIABLE.toBoolean() };
+
+binop[left: Boolean, right: Boolean] : Boolean := { true };
+
+AND       : "AND|&|and";
+OR        : "OR|\||or";
+XOR       : "XOR|\^|xor";
+VARIABLE  : "true|false";
+LEFT_BRACKET : "\(";
+RIGHT_BRACKET : "\)";
+SPACE     skip "[ \t\r\n]" ;
